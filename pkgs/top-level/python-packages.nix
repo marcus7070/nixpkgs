@@ -1017,6 +1017,8 @@ in {
 
   pytest-xprocess = callPackage ../development/python-modules/pytest-xprocess { };
 
+  pytest-xvfb = callPackage ../development/python-modules/pytest-xvfb { };
+
   python-binance = callPackage ../development/python-modules/python-binance { };
 
   python-dbusmock = callPackage ../development/python-modules/python-dbusmock { };
