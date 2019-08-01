@@ -1,10 +1,10 @@
 { lib
-, python36Packages
+, python3Packages
 , fetchFromGitHub
 , qt5
 }:
 
-python36Packages.buildPythonApplication rec {
+python3Packages.buildPythonApplication rec {
   pname = "cq-editor";
   version = "0.1RC1";
 
@@ -15,7 +15,7 @@ python36Packages.buildPythonApplication rec {
     sha256 = "0iwcpnj15s64k16948sakvkn1lb4mqwrhmbxk3r03bczs0z33zax";
   };
 
-  propagatedBuildInputs = with python36Packages; [
+  propagatedBuildInputs = with python3Packages; [
     cadquery
     Logbook
     pyqt5
@@ -27,7 +27,7 @@ python36Packages.buildPythonApplication rec {
     requests
   ];
 
-  checkInputs = with python36Packages; [
+  checkInputs = with python3Packages; [
     pytest
     pytest-xvfb
     pytest-mock
