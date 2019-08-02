@@ -1,53 +1,68 @@
 { lib
 , python3Packages
 , fetchFromGitHub
-, qt5
 }:
 
-python3Packages.buildPythonApplication rec {
-  pname = "cq-editor";
-  version = "0.1RC1";
+let 
+  pyqtgraph-pyqt5 = python3Packages.buildPythonPackage rec {
+    pname = "pyqtgraph";
+    version = "0.10.0";
 
-  src = fetchFromGitHub {
-    owner = "CadQuery";
-    repo = "CQ-editor";
-    rev = version;
-    sha256 = "0iwcpnj15s64k16948sakvkn1lb4mqwrhmbxk3r03bczs0z33zax";
+    src = python3Packages.fetchPypi {
+      inherit pname version;
+      sha256 = "4c08ab34881fae5ecf9ddfe6c1220b9e41e6d3eb1579a7d8ef501abb8e509251";
+    };
+
+    propagatedBuildInputs = with python3Packages; [ scipy numpy pyqt5 pyopengl ];
+
+    doCheck = false;  # "PyQtGraph requires either PyQt4 or PySide; neither package could be imported."
   };
 
-  propagatedBuildInputs = with python3Packages; [
-    cadquery
-    Logbook
-    pyqt5
-    pyparsing
-    pyqtgraph
-    spyder
-    pathpy
-    qtconsole
-    requests
-  ];
+in
+  python3Packages.buildPythonApplication rec {
+    pname = "cq-editor";
+    version = "0.1RC1";
 
-  checkInputs = with python3Packages; [
-    pytest
-    pytest-xvfb
-    pytest-mock
-    pytestcov
-    pytest-repeat
-    pytest-qt
-  ];
+    src = fetchFromGitHub {
+      owner = "CadQuery";
+      repo = "CQ-editor";
+      rev = version;
+      sha256 = "0iwcpnj15s64k16948sakvkn1lb4mqwrhmbxk3r03bczs0z33zax";
+    };
 
-  checkPhase = ''
-    pytest --no-xvfb
-  '';
+    propagatedBuildInputs = with python3Packages; [
+      cadquery
+      Logbook
+      pyqt5
+      # pyside2
+      pyparsing
+      pyqtgraph-pyqt5
+      spyder
+      pathpy
+      requests
+    ];
 
-  # requires X server
-  doCheck = false;
+    checkInputs = with python3Packages; [
+      pytest
+      pytest-xvfb
+      pytest-mock
+      pytestcov
+      pytest-repeat
+      pytest-qt
+    ];
 
-  meta = with lib; {
-    description = "CadQuery GUI editor based on PyQT";
-    homepage = https://github.com/CadQuery/CQ-editor;
-    license = licenses.asl20;
-    maintainers = [ maintainers.costrouc ];
-  };
+    checkPhase = ''
+      pytest --no-xvfb
+    '';
 
-}
+    # requires X server
+    doCheck = false;
+
+    meta = with lib; {
+      description = "CadQuery GUI editor based on PyQT";
+      homepage = https://github.com/CadQuery/CQ-editor;
+      license = licenses.asl20;
+      maintainers = [ maintainers.costrouc ];
+    };
+
+  }

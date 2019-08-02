@@ -9145,7 +9145,7 @@ in
     llvmPackages = llvmPackages_7;
   };
 
-  cq-editor = callPackage ../applications/graphics/cq-editor { };
+  cq-editor = libsForQt5.callPackage ../applications/graphics/cq-editor { };
 
   ccls = callPackage ../development/tools/misc/ccls {
     llvmPackages = llvmPackages_7;
