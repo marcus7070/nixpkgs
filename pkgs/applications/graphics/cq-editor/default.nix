@@ -1,25 +1,9 @@
 { lib
-, buildPythonPackage
+, python3Packages
 , fetchFromGitHub
-, cadquery
-, Logbook
-, qt5
-, pyqt5
-, pyparsing
-, pyqtgraph
-, spyder
-, pathpy
-, qtconsole
-, requests
-, pytest
-, pytest-xvfb
-, pytest-mock
-, pytestcov
-, pytest-repeat
-, pytest-qt
 }:
 
-buildPythonPackage rec {
+python3Packages.buildPythonApplication rec {
   pname = "cq-editor";
   version = "0.1RC1";
 
@@ -30,7 +14,7 @@ buildPythonPackage rec {
     sha256 = "0iwcpnj15s64k16948sakvkn1lb4mqwrhmbxk3r03bczs0z33zax";
   };
 
-  propagatedBuildInputs = [
+  propagatedBuildInputs = with python3Packages; [
     cadquery
     Logbook
     pyqt5
@@ -62,7 +46,7 @@ buildPythonPackage rec {
     description = "CadQuery GUI editor based on PyQT";
     homepage = https://github.com/CadQuery/CQ-editor;
     license = licenses.asl20;
-    maintainers = [ maintainers.costrouc ];
+    maintainers = [ maintainers.costrouc maintainers.marcus7070 ];
   };
 
 }
