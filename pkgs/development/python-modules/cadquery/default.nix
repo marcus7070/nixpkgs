@@ -67,7 +67,7 @@ in
       owner = "CadQuery";
       repo = pname;
       rev = version;
-      sha256 = "1s5arr8w1mn60isaf44diqf72vyscy5ihns3072h16ysbl0b509s";
+      sha256 = "1xgd00rih0gjcnlrf9s6r5a7ypjkzgf2xij2b6436i76h89wmir3";
     };
   
     buildInputs = [

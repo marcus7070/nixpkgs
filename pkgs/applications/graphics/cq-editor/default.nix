@@ -26,7 +26,7 @@ python3Packages.buildPythonApplication rec {
     requests
   ];
 
-  checkInputs = [
+  checkInputs = with python3Packages; [
     pytest
     pytest-xvfb
     pytest-mock
