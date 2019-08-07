@@ -1,9 +1,11 @@
 { lib
+, mkDerivationWith
 , python3Packages
 , fetchFromGitHub
+, qtbase
 }:
 
-python3Packages.buildPythonApplication rec {
+mkDerivationWith python3Packages.buildPythonApplication rec {
   pname = "cq-editor";
   version = "0.1RC1";
 
@@ -15,6 +17,7 @@ python3Packages.buildPythonApplication rec {
   };
 
   propagatedBuildInputs = with python3Packages; [
+    qtbase
     cadquery
     Logbook
     pyqt5
