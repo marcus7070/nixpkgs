@@ -38,6 +38,10 @@ mkDerivationWith python3Packages.buildPythonApplication rec {
     pytest-qt
   ];
 
+  postFixup = ''
+    wrapQtApp "$out/bin/cq-editor"
+  '';
+
   checkPhase = ''
     pytest --no-xvfb
   '';
