@@ -1,19 +1,21 @@
 { lib
-, buildPythonPackage
-, fetchFromGitHub
-, pyparsing
-, opencascade
-, stdenv
-, python
-, cmake
-, swig
-, ninja
-, smesh
-, freetype
-, libGL
-, libGLU
-, libX11
-, six
+  , buildPythonPackage
+  , isPy3k
+  , pythonOlder
+  , fetchFromGitHub
+  , pyparsing
+  , opencascade
+  , stdenv
+  , python
+  , cmake
+  , swig
+  , ninja
+  , smesh
+  , freetype
+  , libGL
+  , libGLU
+  , libX11
+  , six
 }:
 
 let 
@@ -78,6 +80,9 @@ in
       pyparsing
       pythonocc-core-cadquery
     ];
+  
+    # Build errors on 2.7 and >=3.8 (officially only supports 3.6 and 3.7).
+    disabled = !(isPy3k && (pythonOlder "3.8"));
   
     meta = with lib; {
       description = "Parametric scripting language for creating and traversing CAD models";

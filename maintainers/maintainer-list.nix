@@ -4672,6 +4672,12 @@
     githubId = 2881922;
     name = "Francis St-Amour";
   };
+  mtrsk = {
+    email = "marcos.schonfinkel@protonmail.com";
+    github = "mtrsk";
+    githubId = 16356569;
+    name = "Marcos Benevides";
+  };
   mredaelli = {
     email = "massimo@typish.io";
     github = "mredaelli";
@@ -7657,5 +7663,11 @@
     github = "rakesh4g";
     githubId = 50867187;
     name = "Rakesh Gupta";
+  };
+  waiting-for-dev = {
+    email = "marc@lamarciana.com";
+    github = "waiting-for-dev";
+    githubId = 52650;
+    name = "Marc Busqué";
   };
 }
