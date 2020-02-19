@@ -1,7 +1,6 @@
-{ stdenv, buildPythonPackage, fetchFromGitHub, pythonOlder, isPy27, pythonAtLeast
-, backports_functools_lru_cache, configparser, futures, future, jedi, pluggy, python-jsonrpc-server, flake8, ujson
-, versioneer, pytest, mock, pytestcov, coverage, numpy, pandas, matplotlib, pyqt5
-, setuptools
+{ stdenv, buildPythonPackage, fetchFromGitHub, pythonOlder, isPy27
+, backports_functools_lru_cache, configparser, futures, future, jedi, pluggy, python-jsonrpc-server, flake8
+, pytest, mock, pytestcov, coverage, setuptools
 , # Allow building a limited set of providers, e.g. ["pycodestyle"].
   providers ? ["*"]
   # The following packages are optional and
@@ -24,9 +23,6 @@ buildPythonPackage rec {
   pname = "python-language-server";
   version = "0.31.8";
 
-  # no python-jsonrpc-server for >=3.8
-  disabled = pythonAtLeast "3.8";
-
   src = fetchFromGitHub {
     owner = "palantir";
     repo = "python-language-server";
@@ -38,7 +34,7 @@ buildPythonPackage rec {
   doCheck = providers == ["*"];
 
   checkInputs = [
-    versioneer pytest mock pytestcov coverage numpy pandas matplotlib pyqt5
+    pytest mock pytestcov coverage
     # rope is technically a dependency, but we don't add it by default since we
     # already have jedi, which is the preferred option
     rope
@@ -48,7 +44,7 @@ buildPythonPackage rec {
     HOME=$TEMPDIR pytest
   '';
 
-  propagatedBuildInputs = [ setuptools jedi pluggy future python-jsonrpc-server flake8 ujson ]
+  propagatedBuildInputs = [ setuptools jedi pluggy future python-jsonrpc-server flake8 ]
     ++ stdenv.lib.optional (withProvider "autopep8") autopep8
     ++ stdenv.lib.optional (withProvider "mccabe") mccabe
     ++ stdenv.lib.optional (withProvider "pycodestyle") pycodestyle
