@@ -34,13 +34,14 @@ buildPythonPackage rec {
   doCheck = providers == ["*"];
 
   checkInputs = [
-    pytest mock pytestcov coverage
+    pytest mock pytestcov coverage flake8
     # rope is technically a dependency, but we don't add it by default since we
     # already have jedi, which is the preferred option
     rope
   ];
 
   checkPhase = ''
+    flake8 --help
     HOME=$TEMPDIR pytest
   '';
 
